@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DefaultComponent implements OnInit {
 
+  sidebarOpen = false;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  sideBarToggler() {
+    this.sidebarOpen = !this.sidebarOpen;
   }
 
 }

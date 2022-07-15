@@ -1,0 +1,35 @@
+<mat-nav-list>
+    <div class="profile-card">
+        <div class="header">
+            <h2>name</h2>
+            <h4>email</h4>
+        </div>
+        <img src="https://pbs.twimg.com/profile_images/1364318632474468353/ug9CObfD_400x400.png"
+            alt="Track Carbon Logo">
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Pages</h2>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Home</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">Dashboard</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/posts">posts</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/scopes">scopes</a>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Tools</h2>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">
+        <mat-icon>import_contacts</mat-icon>
+        contacts
+    </a>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">
+        <mat-icon>contact_phone</mat-icon>
+        Track Carbon
+    </a>
+
+
+</mat-nav-list>

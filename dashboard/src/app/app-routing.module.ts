@@ -19,7 +19,16 @@ const routes: Routes = [{
     path: 'dashboard',
     component: DashboardComponent
   }]
-}];
+},
+// login and register routing
+{
+  path: 'auth',
+  loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+},
+
+// redirect home
+{ path: '**', redirectTo: '' }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

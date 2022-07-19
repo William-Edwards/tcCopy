@@ -1,0 +1,49 @@
+<div class="container login-container" fxLayout="row" fxLayoutAlign="center center">
+    <form [formGroup]="loginForm" fxFlex="30%" fxFlex.sm="50%" fxFlex.xs="90%">
+        <mat-card>
+            <mat-card-title>Track Carbon App</mat-card-title>
+            <mat-card-subtitle>Log in to your account</mat-card-subtitle>
+            <mat-card-content>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input formControlName="username" type="username" matInput autocomplete="username">
+
+                    <!-- <mat-error id="invalidEmailError" *ngIf="loginForm.controls['email'].hasError('email')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error id="requiredEmailError" *ngIf="loginForm.controls['email'].hasError('required')">
+                        Email is
+                        <strong>required</strong>
+                    </mat-error> -->
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input type="password" formControlName="password" matInput autocomplete="current-password">
+
+                    <!-- <mat-error id="requiredPasswordError" *ngIf="loginForm.controls[password].hasError('required')">
+                    </mat-error> -->
+                </mat-form-field>
+
+                <div class="full-width">
+                    <mat-slide-toggle formControlName="rememberMe" color="primary">Remember me</mat-slide-toggle>
+                </div>
+
+            </mat-card-content>
+
+            <mat-card-actions class="login-actions">
+                <!-- need to add disabled when invalid || loading-->
+                <button mat-raised-button color="primary">
+                    Login
+                </button>
+                <button mat-button type="button">Reset Password</button>
+                <button mat-button routerLink="/auth/register">Register</button>
+            </mat-card-actions>
+
+        </mat-card>
+
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+    </form>
+</div>

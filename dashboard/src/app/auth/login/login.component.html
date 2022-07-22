@@ -1,5 +1,5 @@
 <div class="container login-container" fxLayout="row" fxLayoutAlign="center center">
-    <form [formGroup]="loginForm" fxFlex="30%" fxFlex.sm="50%" fxFlex.xs="90%">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" fxFlex="30%" fxFlex.sm="50%" fxFlex.xs="90%">
         <mat-card>
             <mat-card-title>Track Carbon App</mat-card-title>
             <mat-card-subtitle>Log in to your account</mat-card-subtitle>
@@ -27,18 +27,18 @@
                 </mat-form-field>
 
                 <div class="full-width">
-                    <mat-slide-toggle formControlName="rememberMe" color="primary">Remember me</mat-slide-toggle>
+                    <mat-slide-toggle color="primary">Remember me</mat-slide-toggle>
                 </div>
 
             </mat-card-content>
 
             <mat-card-actions class="login-actions">
                 <!-- need to add disabled when invalid || loading-->
-                <button mat-raised-button color="primary">
+                <button mat-raised-button type="submit" color="primary" [disabled]="loading">
                     Login
                 </button>
                 <button mat-button type="button">Reset Password</button>
-                <button mat-button routerLink="/auth/register">Register</button>
+                <button mat-button type="button" routerLink="/auth/register">Register</button>
             </mat-card-actions>
 
         </mat-card>

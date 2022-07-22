@@ -1,1 +1,42 @@
-<p>register works!</p>
+<div class="container login-container" fxLayout="row" fxLayoutAlign="center center">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" fxFlex="30%" fxFlex.sm="50%" fxFlex.xs="90%">
+        <mat-card>
+            <mat-card-title>Register</mat-card-title>
+            <mat-card-subtitle>Register for a account</mat-card-subtitle>
+            <mat-card-content>
+
+                <mat-form-field class="full-width">
+                    <mat-label>First Name</mat-label>
+                    <input formControlName="firstName" type="text" matInput
+                        [ngClass]="{'is-invalid': submitted && f.firstName.errors}">
+                    <mat-error *ngIf="submitted && f.lastName.errors"> First name is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <mat-label>Last Name</mat-label>
+                    <input formControlName="lastName" type="text" matInput>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input formControlName="username" type="username" matInput autocomplete="username">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input type="password" formControlName="password" matInput>
+                </mat-form-field>
+            </mat-card-content>
+
+            <mat-card-actions class="login-actions">
+                <!-- need to add disabled when invalid || loading-->
+                <button type="submit" mat-raised-button color="primary" [disabled]="loading">
+                    Register
+                </button>
+                <button type="button" mat-button routerLink="/auth/login">Cancel</button>
+            </mat-card-actions>
+        </mat-card>
+
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </form>
+</div>

@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //import user model
-require('./models/user.model')
+require('./models/account.model')
 
 // jwt auth
 app.use(jwt());

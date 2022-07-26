@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user.model')
+const User = require('../models/account.model')
 const userService = require('./users.service')
 
 router.post('/authenticate', authenticate);

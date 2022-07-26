@@ -12,3 +12,10 @@ mongoose.connection.on('connected', () => {
     console.log('Database connected');
 });
 
+function isValidId(id) {
+    return mongoose.Types.ObjectId.isValid(id);
+}
+
+module.exports = {
+    isValidId
+}

@@ -26,7 +26,7 @@
                         <mat-icon>person_outline</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button type="button" onclick="logout()" mat-menu-item>
+                        <button (click)="logout()" mat-menu-item>
                             <mat-icon>exit_to_app</mat-icon>
                             <a>Sign out</a>
                         </button>

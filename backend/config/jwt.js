@@ -1,27 +1,39 @@
 const userService = require('../routes/users.service');
 const { expressjwt: expressJwt } = require('express-jwt');
+const Account = require('../models/account.model');
+const RefreshToken = require('../models/refresh-token.model');
 require('dotenv').config();
 
-module.exports = jwt;
+module.exports = authorize;
 
 const secret = process.env.SECRET;
 
-function jwt() {
-    return expressJwt({ secret, algorithms: ['HS256'], isRevoked }).unless({
-        path: [
-            // public routes that don't require authentication
-            '/users/authenticate',
-            '/users/register'
-        ]
-    });
-}
-
-async function isRevoked(req, token) {
-    const user = await userService.getById(token.payload.sub);
-
-    // revoke token if user no longer exists
-    if (!user) {
-        return true;
+function authorize(roles = []) {
+    // roles param can be a single role string (e.g. Role.User or 'User') 
+    // or an array of roles (e.g. [Role.Admin, Role.User] or ['Admin', 'User'])
+    if (typeof roles === 'string') {
+        roles = [roles];
     }
 
-};
+    return [
+        // authenticate jwt token and attach user to request object
+        expressJwt({ secret, algorithms: ['HS256'] }),
+
+        // authorize based on role
+        async (req, res, next) => {
+            const account = await Account.findById(req.user.id);
+            const refreshTokens = await RefreshToken.find({ account: account.id });
+
+            if (!account || (roles.length && !roles.includes(account.role))) {
+
+                //authorize based on user role
+                return res.status(401).json({ message: 'Unauthorised ' });
+            }
+
+            // authentication and authorization successful
+            req.user.role = account.role;
+            req.user.ownsToken = token => !!refreshTokens.find(x => x.token === token);
+            next();
+        }
+    ];
+}

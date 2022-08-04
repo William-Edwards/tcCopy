@@ -5,26 +5,37 @@
             <mat-card-subtitle>Register for a account</mat-card-subtitle>
             <mat-card-content>
 
-                <mat-form-field class="full-width">
-                    <mat-label>First Name</mat-label>
-                    <input formControlName="firstName" type="text" matInput
-                        [ngClass]="{'is-invalid': submitted && f.firstName.errors}">
-                    <mat-error *ngIf="submitted && f.lastName.errors"> First name is required</mat-error>
-                </mat-form-field>
+                <table class="full-width" cellspacing="0">
+                    <td>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>First Name</mat-label>
+                            <input formControlName="firstName" type="text" matInput
+                                [ngClass]="{'is-invalid': submitted && f.firstName.errors}">
+                            <mat-error *ngIf="submitted && f.lastName.errors"> First name is required</mat-error>
+                        </mat-form-field>
+                    </td>
 
-                <mat-form-field class="full-width">
-                    <mat-label>Last Name</mat-label>
-                    <input formControlName="lastName" type="text" matInput>
-                </mat-form-field>
+                    <td>
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Last Name</mat-label>
+                            <input formControlName="lastName" type="text" matInput>
+                        </mat-form-field>
+                    </td>
+                </table>
 
                 <mat-form-field appearance="fill" class="full-width">
-                    <mat-label>Username</mat-label>
-                    <input formControlName="username" type="username" matInput autocomplete="username">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" type="email" matInput autocomplete="email">
                 </mat-form-field>
 
                 <mat-form-field appearance="fill" class="full-width">
                     <mat-label>Password</mat-label>
-                    <input type="password" formControlName="password" matInput>
+                    <input type="text" formControlName="password" matInput>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Confirm Password</mat-label>
+                    <input type="text" formControlName="confirmPassword" matInput>
                 </mat-form-field>
             </mat-card-content>
 

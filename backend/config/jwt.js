@@ -1,5 +1,5 @@
 const userService = require('../routes/users.service');
-const { expressjwt: expressJwt } = require('express-jwt');
+const { expressjwt: jwt } = require('express-jwt');
 const Account = require('../models/account.model');
 const RefreshToken = require('../models/refresh-token.model');
 require('dotenv').config();
@@ -17,22 +17,21 @@ function authorize(roles = []) {
 
     return [
         // authenticate jwt token and attach user to request object
-        expressJwt({ secret, algorithms: ['HS256'] }),
+        jwt({ secret, algorithms: ['HS256'] }),
 
         // authorize based on role
         async (req, res, next) => {
-            const account = await Account.findById(req.user.id);
+            const account = await Account.findById(req.auth.id);
             const refreshTokens = await RefreshToken.find({ account: account.id });
 
             if (!account || (roles.length && !roles.includes(account.role))) {
 
-                //authorize based on user role
                 return res.status(401).json({ message: 'Unauthorised ' });
             }
 
             // authentication and authorization successful
-            req.user.role = account.role;
-            req.user.ownsToken = token => !!refreshTokens.find(x => x.token === token);
+            req.auth.role = account.role;
+            req.auth.ownsToken = token => !!refreshTokens.find(x => x.token === token);
             next();
         }
     ];

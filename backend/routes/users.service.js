@@ -1,9 +1,11 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const db = require('../config/database');
 const Account = require('../models/account.model');
 const RefreshToken = require('../models/refresh-token.model');
-const Role = require('../config/role');
+const sendEmail = require('../config/send-email');
+const Role = require('../models/role');
 require('dotenv').config();
 
 module.exports = {
@@ -78,7 +80,7 @@ async function revokeToken({ token, ipAddress }) {
     await refreshToken.save();
 }
 
-async function register(params, orgins) {
+async function register(params, origin) {
     // validate
     if (await Account.findOne({ email: params.email })) {
         // send already registered error in email to prevent account enumeration
@@ -113,7 +115,7 @@ async function verifyEmail({ token }) {
     await account.save();
 }
 
-async function forgotPassword({ email }, orgin) {
+async function forgotPassword({ email }, origin) {
     const account = await Account.findOne({ email });
 
     // always return ok response to prevent email enumeration
@@ -127,7 +129,7 @@ async function forgotPassword({ email }, orgin) {
     await account.save();
 
     // send email
-    await sendPasswordResetEmail(account, orgin);
+    await sendPasswordResetEmail(account, origin);
 
 }
 

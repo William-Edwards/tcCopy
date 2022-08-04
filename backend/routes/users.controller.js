@@ -4,7 +4,7 @@ const router = express.Router();
 const Joi = require('joi');
 const validateRequest = require('../config/validate-request');
 const authorize = require('../config/jwt')
-const Role = require('../config/role');
+const Role = require('../models/role');
 const accountService = require('./users.service');
 
 // routes
@@ -70,7 +70,7 @@ function revokeToken(req, res, next) {
     if (!token) return res.status(400).json({ message: 'Token is required' });
 
     // users can revoke their own tokens and admins can revoke any tokens
-    if (!req.user.ownsToken(token) && req.user.role !== Role.Admin) {
+    if (!req.auth.ownsToken(token) && req.auth.role !== Role.Admin) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
@@ -94,7 +94,7 @@ function registerSchema(req, res, next) {
 
 
 function register(req, res, next) {
-    accountService.register(req.body, req.get('orgin'))
+    accountService.register(req.body, req.get('origin'))
         .then(() => res.json({ message: 'Registration successful, please check your email for verification instructions' }))
         .catch(next);
 }
@@ -161,7 +161,7 @@ function getAll(req, res, next) {
 
 function getById(req, res, next) {
     // users can get their own account and admins can get any account
-    if (req.params.id !== req.user.id && req.user.role !== Role.Admin) {
+    if (req.params.id !== req.auth.id && req.auth.role !== Role.Admin) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
@@ -200,7 +200,7 @@ function updateSchema(req, res, next) {
     };
 
     // only admins can update role
-    if (req.user.role === Role.Admin) {
+    if (req.auth.role === Role.Admin) {
         schemaRules.role = Joi.string().valid(Role.Admin, Role.User).empty('');
     }
 
@@ -210,7 +210,7 @@ function updateSchema(req, res, next) {
 
 function update(req, res, next) {
     // users can update their own account and admins can update any account
-    if (req.params.id !== req.user.id && req.user.role !== Role.Admin) {
+    if (req.params.id !== req.auth.id && req.auth.role !== Role.Admin) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
@@ -221,7 +221,7 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     // users can delete their own account and admins can delete any account
-    if (req.params.id !== req.user.id && req.user.role !== Role.Admin) {
+    if (req.params.id !== req.auth.id && req.auth.role !== Role.Admin) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 

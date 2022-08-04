@@ -14,3 +14,7 @@
 .login-actions {
     margin-left: unset !important;
 }
+
+.spacer {
+    flex: 1 1 auto;
+}

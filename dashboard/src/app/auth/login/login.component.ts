@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
     // private alertService: 
   ) {
     // redirect to home if logged in needed
-    if (this.authService.currentUserValue) {
-      this.router.navigate(['/']);
-    }
+    // if (this.authService.currentUserValue) {
+    //   this.router.navigate(['/']);
+    // }
 
   }
 

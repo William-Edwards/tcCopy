@@ -22,9 +22,9 @@ export class RegisterComponent implements OnInit {
     // private alertService: 
   ) {
     // redirect home if logged in
-    // if (this.authService.currentUserValue) {
-    //   this.router.navigate(['/']);
-    // }
+    if (this.authService.accountValue) {
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit(): void {

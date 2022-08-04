@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
     private authService: AuthService
     // private alertService: 
   ) {
-    // // redirect to home if logged in needed
-    // if (this.authService.currentUserValue) {
-    //   this.router.navigate(['/']);
-    // }
+    // redirect to home if logged in needed
+    if (this.authService.accountValue) {
+      this.router.navigate(['/']);
+    }
 
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { AuthService } from '../auth.service';
 
@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
     // private alertService: 
@@ -31,8 +32,9 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
     });
   }
 
@@ -40,6 +42,8 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+
+    // alert service
 
 
     if (this.registerForm.invalid) {
@@ -49,18 +53,16 @@ export class RegisterComponent implements OnInit {
 
     this.loading = true;
     this.authService.register(this.registerForm.value)
-      .pipe(first()).subscribe(
-        data => {
-          // add alert
+      .pipe(first()).subscribe({
+        next: () => {
+          // alert service
           this.router.navigate(['/auth/login']);
         },
-        error => {
-          // add alert
+        error: error => {
+          // alert service error
           this.loading = false;
         }
-
-      )
-
+      });
   }
 
 }

@@ -9,6 +9,8 @@ const schema = new Schema({
     lastName: { type: String, required: true },
     acceptTerms: Boolean,
     role: { type: String, required: true },
+    company: { type: String },
+    tier: { type: String, default: 'Bronze' },
     verificationToken: String,
     verified: Date,
     resetToken: {

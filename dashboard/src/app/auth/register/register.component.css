@@ -14,3 +14,7 @@
 .login-actions {
     margin-left: unset !important;
 }
+
+.td {
+    padding-right: 8px;
+}

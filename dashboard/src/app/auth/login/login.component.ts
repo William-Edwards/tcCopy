@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,7 +22,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService
     // private alertService: 
   ) {
-    // redirect to home if logged in needed
+    // // redirect to home if logged in needed
     // if (this.authService.currentUserValue) {
     //   this.router.navigate(['/']);
     // }
@@ -32,11 +31,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
 
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // getter for form fields needs checking
@@ -45,23 +43,28 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
+    // alarm service add in
+
+    // stops here if form invalid
     if (this.loginForm.invalid) {
       return;
     }
 
 
     this.loading = true;
-    this.authService.login(this.f.username.value, this.f.password.value)
-      .pipe(first()).subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]); // return url functionalty
+    this.authService.login(this.f.email.value, this.f.password.value)
+      .pipe(first()).subscribe({
+        next: () => {
+          // get return url from query params or default to home page
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigateByUrl(returnUrl);
         },
-        error => {
-          //add alert
+        error: error => {
+          // alarm service here
           this.loading = false;
         }
 
-      )
+      });
 
   }
 

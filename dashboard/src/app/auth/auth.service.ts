@@ -59,19 +59,19 @@ export class AuthService {
   }
 
   verifyEmail(token: string) {
-    return this.http.post(this.API_URL + '/acccounts/verify-email', { token });
+    return this.http.post(this.API_URL + '/accounts/verify-email', { token });
   }
 
   forgotPassword(email: string) {
-    return this.http.post(this.API_URL + '/acccounts/forgot-password', { email });
+    return this.http.post(this.API_URL + '/accounts/forgot-password', { email });
   }
 
   validateResetToken(token: string) {
-    return this.http.post(this.API_URL + '/acccounts/validate-reset-token', { token });
+    return this.http.post(this.API_URL + '/accounts/validate-reset-token', { token });
   }
 
   resetPassword(token: string, password: string, confirmPassword: string) {
-    return this.http.post(this.API_URL + '/acccounts/reset-password', { token, password, confirmPassword });
+    return this.http.post(this.API_URL + '/accounts/reset-password', { token, password, confirmPassword });
   }
 
   getAll() {

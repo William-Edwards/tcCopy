@@ -1,0 +1,15 @@
+<div class="container login-container" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card>
+        <mat-card-title>Verify Email</mat-card-title>
+        <mat-card-content>
+            <div *ngIf="emailStatus == EmailStatus.Verifying">
+                Verifying...
+            </div>
+            <div *ngIf="emailStatus == EmailStatus.Failed">
+                Verification failed, you can also verify your account using the <a
+                    routerLink="/auth/forgot-password">forgot
+                    password</a> page.
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

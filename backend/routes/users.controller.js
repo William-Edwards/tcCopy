@@ -5,6 +5,7 @@ const Joi = require('joi');
 const validateRequest = require('../config/validate-request');
 const authorize = require('../config/jwt')
 const Role = require('../models/role');
+const Tier = require('../models/tiers')
 const accountService = require('./users.service');
 
 // routes
@@ -81,13 +82,11 @@ function revokeToken(req, res, next) {
 
 function registerSchema(req, res, next) {
     const schema = Joi.object({
-        title: Joi.string().required(),
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         email: Joi.string().email().required(),
         password: Joi.string().min(6).required(),
         confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
-        acceptTerms: Joi.boolean().valid(true).required()
     });
     validateRequest(req, next, schema);
 }
@@ -172,13 +171,14 @@ function getById(req, res, next) {
 
 function createSchema(req, res, next) {
     const schema = Joi.object({
-        title: Joi.string().required(),
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         email: Joi.string().email().required(),
         password: Joi.string().min(6).required(),
         confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
-        role: Joi.string().valid(Role.Admin, Role.User).required()
+        role: Joi.string().valid(Role.Admin, Role.User).required(),
+        company: Joi.string(),
+        tier: Joi.string().valid(Tier.Bronze, Tier.Silver, Tier.Gold).required
     });
     validateRequest(req, next, schema);
 }
@@ -191,7 +191,6 @@ function create(req, res, next) {
 
 function updateSchema(req, res, next) {
     const schemaRules = {
-        title: Joi.string().empty(''),
         firstName: Joi.string().empty(''),
         lastName: Joi.string().empty(''),
         email: Joi.string().email().empty(''),
@@ -202,6 +201,8 @@ function updateSchema(req, res, next) {
     // only admins can update role
     if (req.auth.role === Role.Admin) {
         schemaRules.role = Joi.string().valid(Role.Admin, Role.User).empty('');
+        schemaRules.company = Joi.string().empty('');
+        schemaRules.tier = Joi.string().valid(Tier.Bronze, Tier.Silver, Tier.Gold).empty('');
     }
 
     const schema = Joi.object(schemaRules).with('password', 'confirmPassword');

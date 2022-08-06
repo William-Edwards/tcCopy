@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 module.exports = sendEmail;
 
-// more these to env possibly
+// move these to env possibly
 const emailFrom = "no-reply@trackcarbon.com"
 
 

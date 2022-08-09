@@ -6,6 +6,10 @@ import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { SharedModule } from '../shared/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -17,7 +21,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     AdminRoutingModule,
     SharedModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatToolbarModule,
+    FlexLayoutModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class AdminModule { }

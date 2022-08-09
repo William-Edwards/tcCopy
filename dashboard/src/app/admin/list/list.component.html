@@ -1,4 +1,24 @@
-<app-header></app-header>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
 
+        <span>Add logo</span>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+            <ul fxLayout="row" fxLayoutGap="20px">
+                <li>
+                    <button mat-button [matMenuTriggerFor]="menu">
+                        <mat-icon>person_outline</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="logout()" mat-menu-item>
+                            <mat-icon>exit_to_app</mat-icon>
+                            <a>Sign out</a>
+                        </button>
+                    </mat-menu>
+                </li>
+            </ul>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
 
 <app-footer></app-footer>

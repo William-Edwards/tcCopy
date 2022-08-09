@@ -1,0 +1,51 @@
+<div style="width: 100%; ">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-card>
+            <mat-card-title>Profile</mat-card-title>
+            <mat-card-subtitle>Update your profile</mat-card-subtitle>
+            <mat-card-content>
+
+
+
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input formControlName="firstName" type="text" matInput>
+                </mat-form-field>
+
+
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input formControlName="lastName" type="text" matInput>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" type="email" matInput>
+                </mat-form-field>
+
+                <table>
+                    <td>
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Password</mat-label>
+                            <input formControlName="password" type="password" matInput>
+                        </mat-form-field>
+                    </td>
+
+                    <td>
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Confirm Password</mat-label>
+                            <input formControlName="confirmPassword" type="password" matInput>
+                        </mat-form-field>
+                    </td>
+                </table>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button mat-raised-button type="submit" color="primary" [disabled]="loading">Submit</button>
+                <button mat-raised-button type="button" routerLink="../">Cancel</button>
+            </mat-card-actions>
+        </mat-card>
+
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </form>
+</div>

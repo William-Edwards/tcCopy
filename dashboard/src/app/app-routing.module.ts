@@ -5,6 +5,7 @@ import { DefaultComponent } from './default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { HomeComponent } from './modules/home/home.component';
 import { PostsComponent } from './modules/posts/posts.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 const routes: Routes = [{
   path: '',
@@ -19,7 +20,12 @@ const routes: Routes = [{
   {
     path: 'dashboard',
     component: DashboardComponent
-  }], canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  }]
+  // , canActivate: [AuthGuard]
 },
 // login and register routing
 {

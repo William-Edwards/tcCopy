@@ -10,10 +10,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { DefaultModule } from './default/default.module';
 import { JwtInterceptor } from './auth/jwt.interceptor';
 
-
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,

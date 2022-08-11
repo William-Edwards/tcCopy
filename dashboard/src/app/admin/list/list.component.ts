@@ -12,9 +12,8 @@ import { first } from 'rxjs';
 })
 export class ListComponent implements OnInit {
   accounts: any[];
-  account = this.accountService.accountValue;
 
-  displayedColumns: string[] = ['firstName', 'email', 'role', 'tier', 'company'];
+  displayedColumns: string[] = ['firstName', 'email', 'role', 'tier', 'company', 'edit'];
 
   constructor(
     private router: Router,
@@ -26,7 +25,6 @@ export class ListComponent implements OnInit {
       .pipe(first())
       .subscribe(accounts => this.accounts = accounts);
 
-    console.log(this.account);
   }
 
   logout() {

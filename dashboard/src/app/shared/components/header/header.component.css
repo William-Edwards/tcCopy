@@ -6,3 +6,9 @@ mat-slide-toggle {
     padding-top: 9px;
 
 }
+
+.resize {
+    width: 250px;
+    height: auto;
+    padding-top: 9px;
+}

@@ -20,6 +20,8 @@ import { ProfileComponent } from '../modules/profile/profile.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { ScopesComponent } from '../modules/scopes/scopes.component';
+import { TargetsComponent } from '../modules/targets/targets.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { MatInputModule } from '@angular/material/input';
     DashboardComponent,
     PostsComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    ScopesComponent,
+    TargetsComponent
   ],
   imports: [
     CommonModule,

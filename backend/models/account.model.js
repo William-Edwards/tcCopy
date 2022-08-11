@@ -8,7 +8,7 @@ const schema = new Schema({
     lastName: { type: String, required: true },
     role: { type: String, required: true },
     company: { type: String },
-    tier: { type: String, default: 'Bronze' },
+    tier: { type: String, required: true },
     verificationToken: String,
     verified: Date,
     resetToken: {

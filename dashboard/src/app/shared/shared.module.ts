@@ -19,8 +19,6 @@ import { PieComponent } from './widgets/pie/pie.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
-
-
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -41,7 +39,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatListModule,
     RouterModule,
     HighchartsChartModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+
   ],
   exports: [
     HeaderComponent,

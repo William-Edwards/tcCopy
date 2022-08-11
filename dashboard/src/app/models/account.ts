@@ -1,4 +1,5 @@
 import { Role } from './roles';
+import { Tier } from './tiers';
 
 export class Account {
     id: string;
@@ -7,6 +8,6 @@ export class Account {
     email: string;
     role: Role;
     company: string;
-    tier: string;
+    tier: Tier;
     jwtToken?: string;
 }

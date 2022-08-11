@@ -177,8 +177,8 @@ function createSchema(req, res, next) {
         password: Joi.string().min(6).required(),
         confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
         role: Joi.string().valid(Role.Admin, Role.User).required(),
-        company: Joi.string(),
-        tier: Joi.string().valid(Tier.Bronze, Tier.Silver, Tier.Gold).required
+        tier: Joi.string().valid(Tier.Bronze, Tier.Silver, Tier.Gold).required(),
+        company: Joi.string().required()
     });
     validateRequest(req, next, schema);
 }

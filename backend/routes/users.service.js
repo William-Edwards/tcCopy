@@ -6,6 +6,7 @@ const Account = require('../models/account.model');
 const RefreshToken = require('../models/refresh-token.model');
 const sendEmail = require('../config/send-email');
 const Role = require('../models/role');
+const Tier = require('../models/tiers');
 require('dotenv').config();
 
 module.exports = {
@@ -93,6 +94,7 @@ async function register(params, origin) {
     // first registered account is an admin
     const isFirstAccount = (await Account.countDocuments({})) === 0;
     account.role = isFirstAccount ? Role.Admin : Role.User;
+    account.tier = Tier.Bronze;
     account.verificationToken = randomTokenString();
 
     // hash password
@@ -252,8 +254,8 @@ function randomTokenString() {
 }
 
 function basicDetails(account) {
-    const { id, title, firstName, lastName, email, role, created, updated, isVerified } = account;
-    return { id, title, firstName, lastName, email, role, created, updated, isVerified };
+    const { id, title, firstName, lastName, email, role, tier, company, created, updated, isVerified } = account;
+    return { id, title, firstName, lastName, email, role, tier, company, created, updated, isVerified };
 }
 
 async function sendVerificationEmail(account, origin) {
@@ -269,7 +271,7 @@ async function sendVerificationEmail(account, origin) {
 
     await sendEmail({
         to: account.email,
-        subject: 'Sign-up Verification API - Verify Email',
+        subject: 'TrackCarbon - Verify Email',
         html: `<h4>Verify Email</h4>
                <p>Thanks for registering!</p>
                ${message}`
@@ -286,7 +288,7 @@ async function sendAlreadyRegisteredEmail(email, origin) {
 
     await sendEmail({
         to: email,
-        subject: 'Sign-up Verification API - Email Already Registered',
+        subject: 'TrackCarbon- Email Already Registered',
         html: `<h4>Email Already Registered</h4>
                <p>Your email <strong>${email}</strong> is already registered.</p>
                ${message}`
@@ -306,7 +308,7 @@ async function sendPasswordResetEmail(account, origin) {
 
     await sendEmail({
         to: account.email,
-        subject: 'Sign-up Verification API - Reset Password',
+        subject: 'TrackCarbon - Reset Password',
         html: `<h4>Reset Password Email</h4>
                ${message}`
     });

@@ -6,6 +6,8 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { HomeComponent } from './modules/home/home.component';
 import { PostsComponent } from './modules/posts/posts.component';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { ScopesComponent } from './modules/scopes/scopes.component';
+import { TargetsComponent } from './modules/targets/targets.component';
 
 const routes: Routes = [{
   path: '',
@@ -24,6 +26,14 @@ const routes: Routes = [{
   {
     path: 'profile',
     component: ProfileComponent
+  },
+  {
+    path: 'scopes',
+    component: ScopesComponent
+  },
+  {
+    path: 'targets',
+    component: TargetsComponent
   }]
   , canActivate: [AuthGuard]
 },

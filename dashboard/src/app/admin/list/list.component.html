@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
 
-        <span>Add logo</span>
+        <span><img class="resize" src="/assets\images\track Carbon Logo white.png" alt="TrackCarbon"></span>
 
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
@@ -26,7 +26,6 @@
 
         <mat-card>
             <mat-card-content>
-                <!-- <h2>Hi {{account.firstName}}</h2> -->
 
                 <mat-card-actions>
                     <button mat-raised-button type="button" color="primary" routerLink="/admin/edit">
@@ -34,57 +33,61 @@
                     </button>
                 </mat-card-actions>
 
-                <table mat-table [dataSource]="accounts" class="mat-elevation-z8">
+                <mat-form-field appearance="standard">
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                </mat-form-field>
 
-                    <ng-container matColumnDef="firstName">
-                        <th mat-header-cell *matHeaderCellDef>Name</th>
-                        <td mat-cell *matCellDef="let account"> {{account.firstName}} {{account.lastName}}</td>
-                    </ng-container>
+                <div>
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
-                    <ng-container matColumnDef="email">
-                        <th mat-header-cell *matHeaderCellDef>Email</th>
-                        <td mat-cell *matCellDef="let account"> {{account.email}} </td>
-                    </ng-container>
+                        <ng-container matColumnDef="firstName">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                            <td mat-cell *matCellDef="let account"> {{account.firstName}} {{account.lastName}}</td>
+                        </ng-container>
 
-                    <ng-container matColumnDef="role">
-                        <th mat-header-cell *matHeaderCellDef>Role</th>
-                        <td mat-cell *matCellDef="let account"> {{account.role}} </td>
-                    </ng-container>
+                        <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                            <td mat-cell *matCellDef="let account"> {{account.email}} </td>
+                        </ng-container>
 
-                    <ng-container matColumnDef="tier">
-                        <th mat-header-cell *matHeaderCellDef>Tier</th>
-                        <td mat-cell *matCellDef="let account"> {{account.tier}} </td>
-                    </ng-container>
+                        <ng-container matColumnDef="role">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+                            <td mat-cell *matCellDef="let account"> {{account.role}} </td>
+                        </ng-container>
 
-                    <ng-container matColumnDef="company">
-                        <th mat-header-cell *matHeaderCellDef>Company</th>
-                        <td mat-cell *matCellDef="let account"> {{account.company}} </td>
-                    </ng-container>
+                        <ng-container matColumnDef="tier">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tier</th>
+                            <td mat-cell *matCellDef="let account"> {{account.tier}} </td>
+                        </ng-container>
 
+                        <ng-container matColumnDef="company">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Company</th>
+                            <td mat-cell *matCellDef="let account"> {{account.company}} </td>
+                        </ng-container>
 
-                    <!-- Checkbox Column -->
-                    <ng-container matColumnDef="edit">
-                        <th mat-header-cell *matHeaderCellDef>
-                        </th>
-                        <td mat-cell *matCellDef="let account">
-                            <section>
-                                <div class="button-row">
-                                    <button mat-raised-button color="primary" style="margin-right:10px"
-                                        routerLink="edit/{{account.id}}">
-                                        Edit
-                                    </button>
-                                    <button mat-raised-button color="warn" (click)="deleteAccount(account.id)"
-                                        [disabled]="account.isDeleting">
-                                        Delete
-                                    </button>
-                                </div>
-                            </section>
-                        </td>
-                    </ng-container>
+                        <ng-container matColumnDef="edit">
+                            <th mat-header-cell *matHeaderCellDef>
+                            </th>
+                            <td mat-cell *matCellDef="let account">
+                                <section>
+                                    <div class="button-row">
+                                        <button mat-raised-button color="primary" style="margin-right:10px"
+                                            routerLink="edit/{{account.id}}">
+                                            Edit
+                                        </button>
+                                    </div>
+                                </section>
+                            </td>
+                        </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users">
+                    </mat-paginator>
+                </div>
             </mat-card-content>
         </mat-card>
 

@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Account } from 'src/app/models/account';
 import { first } from 'rxjs';
+
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -10,21 +14,27 @@ import { first } from 'rxjs';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
-  accounts: any[];
-
+export class ListComponent implements AfterViewInit {
   displayedColumns: string[] = ['firstName', 'email', 'role', 'tier', 'company', 'edit'];
+
+  dataSource = new MatTableDataSource<Account>();
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private router: Router,
     private accountService: AuthService
+
+
   ) { }
 
-  ngOnInit(): void {
-    this.accountService.getAll()
-      .pipe(first())
-      .subscribe(accounts => this.accounts = accounts);
 
+  ngAfterViewInit(): void {
+    this.accountService.getAll().subscribe(accounts => {
+      this.dataSource.data = accounts;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   logout() {
@@ -33,14 +43,14 @@ export class ListComponent implements OnInit {
     this.router.navigate(['/auth/login']);
   }
 
-  deleteAccount(id: string) {
-    const account = this.accounts.find(x => x.id === id);
-    account.isDeleting = true;
-    this.accountService.delete(id)
-      .pipe(first())
-      .subscribe(() => {
-        this.accounts = this.accounts.filter(x => x.id !== id)
-      });
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }

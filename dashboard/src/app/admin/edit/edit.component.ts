@@ -6,6 +6,16 @@ import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MustMatch } from 'src/app/auth/must-match.validator';
 
+interface Role {
+  value: string;
+  viewValue: string;
+}
+
+interface Tier {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -17,6 +27,17 @@ export class EditComponent implements OnInit {
   isAddMode: boolean;
   loading = false;
   submitted = false;
+
+  roles: Role[] = [
+    { value: 'Admin', viewValue: 'Admin' },
+    { value: 'User', viewValue: 'User' }
+  ];
+
+  tiers: Tier[] = [
+    { value: 'Bronze', viewValue: 'Bronze' },
+    { value: 'Silver', viewValue: 'Silver' },
+    { value: 'Gold', viewValue: 'Gold' }
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +52,6 @@ export class EditComponent implements OnInit {
     this.isAddMode = !this.id;
 
     this.form = this.formBuilder.group({
-      title: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -61,6 +81,8 @@ export class EditComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.form.invalid) {
+      console.log('hello')
+      console.log(this.form)
       return;
     }
 
@@ -68,7 +90,6 @@ export class EditComponent implements OnInit {
     if (this.isAddMode) {
       this.createAccount();
     } else {
-      console.log('hello')
       this.updateAccount();
     }
   }
@@ -79,7 +100,7 @@ export class EditComponent implements OnInit {
       .subscribe({
         next: () => {
           // alert service
-          this.router.navigate(['/admin']);
+          this.router.navigate(['../'], { relativeTo: this.route });
         },
         error: error => {
           // alert service
@@ -94,12 +115,28 @@ export class EditComponent implements OnInit {
       .subscribe({
         next: () => {
           // alert service
-          this.router.navigate(['/admin']);
+          this.router.navigate(['../../'], { relativeTo: this.route });
         },
         error: error => {
           // alert service
           this.loading = false;
         }
+      });
+  }
+
+  deleteAccount() {
+    this.accountService.delete(this.id)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          // alert service
+          this.router.navigate(['../../'], { relativeTo: this.route });
+        },
+        error: error => {
+          // alert service
+          this.loading = false;
+        }
+
       });
   }
 

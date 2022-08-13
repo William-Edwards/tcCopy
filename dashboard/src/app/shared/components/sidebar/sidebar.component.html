@@ -22,15 +22,15 @@
         Scope Emissions
     </button>
     <mat-menu #scope="matMenu" xPosition="after">
-        <button mat-menu-item routerLink="/posts">Scope 1</button>
-        <button mat-menu-item routerLink="/posts">Scope 2</button>
-        <button mat-menu-item routerLink="/posts">Scope 3</button>
+        <button mat-menu-item routerLink="/dashboard">Scope 1</button>
+        <button mat-menu-item routerLink="/scope-two">Scope 2</button>
+        <button mat-menu-item routerLink="/scope-three">Scope 3</button>
     </mat-menu>
 
     <button mat-list-item [matMenuTriggerFor]="targets">Target-Setting</button>
     <mat-menu #targets="matMenu" xPosition="after">
-        <button mat-menu-item routerLink="/posts">Intensity Targets</button>
-        <button mat-menu-item routerLink="/posts">Absolute Targets</button>
+        <button mat-menu-item routerLink="/target-one">Intensity Targets</button>
+        <button mat-menu-item routerLink="/target-two">Absolute Targets</button>
     </mat-menu>
 
     <button mat-list-item [matMenuTriggerFor]="afterMenu">Risk Models</button>
@@ -46,15 +46,17 @@
 
     <h2 matSubheader>Tools</h2>
 
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">
-        <mat-icon>import_contacts</mat-icon>
-        contacts
-    </a>
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/profile">
         <mat-icon>contact_phone</mat-icon>
-        profile
+        Profile
     </a>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/posts">
+        <mat-icon>import_contacts</mat-icon>
+        Export Data
+    </a>
+
 
 
 </mat-nav-list>

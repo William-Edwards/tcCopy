@@ -1,0 +1,7 @@
+<div *ngIf="alerts.length">
+    <div>
+        <div *ngFor="let alert of alerts" class="{{cssClasses(alert)}}">
+            <span [innerHTML]="alert.message"></span>
+        </div>
+    </div>
+</div>

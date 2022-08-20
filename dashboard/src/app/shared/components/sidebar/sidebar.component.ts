@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/auth/auth.service';
-import { Role } from 'src/app/models/roles';
 import { Account } from 'src/app/models/account';
 
 @Component({
@@ -11,9 +10,11 @@ import { Account } from 'src/app/models/account';
 })
 export class SidebarComponent implements OnInit {
   account = this.accountService.accountValue;
+  Account: Account;
 
 
   constructor(private accountService: AuthService) {
+    this.accountService.account.subscribe(x => this.account = x);
   }
 
   ngOnInit(): void {

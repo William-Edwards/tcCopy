@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Account } from 'src/app/models/account';
+import { Tier } from 'src/app/models/tiers';
+import { Role } from 'src/app/models/roles'
 
 @Component({
   selector: 'app-home',
@@ -6,12 +10,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  account: Account;
+  Tier: Tier;
+  Role: Role;
 
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
-
-  constructor() { }
+  constructor(private accountService: AuthService) {
+    this.accountService.account.subscribe(x => this.account = x);
+  }
 
   ngOnInit(): void {
   }

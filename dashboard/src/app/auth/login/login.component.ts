@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { first } from 'rxjs';
+import { AlertService } from 'src/app/alerts/alert.service';
 import { Role } from 'src/app/models/roles';
 import { AuthService } from '../auth.service';
 
@@ -20,8 +21,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
-    // private alertService: 
+    private authService: AuthService,
+    private alertService: AlertService
   ) {
     // redirect to home if logged in needed
     if (this.authService.accountValue) {
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // alarm service add in
+    this.alertService.clear();
 
     // stops here if form invalid
     if (this.loginForm.invalid) {
@@ -62,7 +63,7 @@ export class LoginComponent implements OnInit {
           this.redirectAccount(data.role);
         },
         error => {
-          // alarm service here
+          this.alertService.error(error);
           this.loading = false;
         });
 

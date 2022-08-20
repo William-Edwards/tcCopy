@@ -5,14 +5,11 @@
 }
 
 .mat-raised-button {
-    height: 400px;
-    width: 800px !important;
+    height: 200px;
+    width: 1000px !important;
     min-width: unset !important;
+    font-size: 30px;
 }
-
-/* .welcome-text {
-
-} */
 
 .example-card {
     max-width: 400px;

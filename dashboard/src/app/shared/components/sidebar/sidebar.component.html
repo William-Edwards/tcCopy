@@ -12,11 +12,6 @@
 
     <h2 matSubheader>Pages</h2>
 
-    <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Home</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">Dashboard</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/posts">posts</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/scopes">scopes</a> -->
-
     <button mat-list-item [matMenuTriggerFor]="scope">
         <mat-icon>track_changes</mat-icon>
         Scope Emissions
@@ -27,13 +22,19 @@
         <button mat-menu-item routerLink="/scope-three">Scope 3</button>
     </mat-menu>
 
-    <button mat-list-item [matMenuTriggerFor]="targets">Target-Setting</button>
+    <button mat-list-item [matMenuTriggerFor]="targets" *ngIf="account.tier === 'Silver' || account.tier === 'Gold'">
+        <mat-icon>assignment_turned_in</mat-icon>
+        Target-Setting
+    </button>
     <mat-menu #targets="matMenu" xPosition="after">
         <button mat-menu-item routerLink="/target-one">Intensity Targets</button>
         <button mat-menu-item routerLink="/target-two">Absolute Targets</button>
     </mat-menu>
 
-    <button mat-list-item [matMenuTriggerFor]="afterMenu">Risk Models</button>
+    <button mat-list-item [matMenuTriggerFor]="afterMenu" *ngIf="account.tier === 'Gold'">
+        <mat-icon>trending_up</mat-icon>
+        Risk Models
+    </button>
     <mat-menu #afterMenu="matMenu" xPosition="after">
         <button mat-menu-item>Item 1</button>
         <button mat-menu-item>Item 2</button>

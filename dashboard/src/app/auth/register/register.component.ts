@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
+import { AlertService } from 'src/app/alerts/alert.service';
 import { AuthService } from '../auth.service';
 import { MustMatch } from '../must-match.validator';
 
@@ -19,8 +20,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
-    // private alertService: 
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private alertService: AlertService
   ) {
     // redirect home if logged in
     if (this.authService.accountValue) {
@@ -45,8 +47,7 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // alert service
-
+    this.alertService.clear();
 
     if (this.registerForm.invalid) {
       return;
@@ -57,11 +58,11 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.registerForm.value)
       .pipe(first()).subscribe({
         next: () => {
-          // alert service
-          this.router.navigate(['/auth/login']);
+          this.alertService.success('Registration successful, please check your email for verification instructions', { keepAfterRouteChange: true });
+          this.router.navigate(['./login'], { relativeTo: this.route });
         },
         error: error => {
-          // alert service error
+          this.alertService.error(error);
           this.loading = false;
         }
       });

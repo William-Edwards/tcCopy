@@ -8,6 +8,7 @@
     height: 400px;
     width: 800px !important;
     min-width: unset !important;
+    font-size: 30px;
 }
 
 /* .welcome-text {

@@ -9,12 +9,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { DefaultModule } from './default/default.module';
 import { JwtInterceptor } from './auth/jwt.interceptor';
+import { AlertComponent } from './alerts/alert/alert.component';
+import { ErrorInterceptor } from './auth/error.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-
-
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -23,10 +24,11 @@ import { JwtInterceptor } from './auth/jwt.interceptor';
     FlexLayoutModule,
     MatButtonModule,
     DefaultModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

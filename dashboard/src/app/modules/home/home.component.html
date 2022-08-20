@@ -51,12 +51,13 @@
         <mat-icon>track_changes</mat-icon>
         Scope Emissions
     </button>
-    <button mat-raised-button color="accent" routerLink="/targets">
-        <mat-icon>track_changes</mat-icon>
+    <button mat-raised-button color="accent" routerLink="/targets"
+        *ngIf="account.tier === 'Silver' || account.tier === 'Gold'">
+        <mat-icon>assignment_turned_in</mat-icon>
         Target-Setting
     </button>
-    <button mat-raised-button>
-        <mat-icon>track_changes</mat-icon>
+    <button mat-raised-button *ngIf="account.tier === 'Gold'">
+        <mat-icon>trending_up</mat-icon>
         Risk Models
     </button>
 </div>

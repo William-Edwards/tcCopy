@@ -2,10 +2,10 @@
 
 # Code references
 
-https://jasonwatmore.com/post/2020/08/29/angular-10-boilerplate-email-sign-up-with-verification-authentication-forgot-password
-https://www.bezkoder.com/angular-13-jwt-auth/
-https://github.com/umutesen/angular-material-template
-https://www.youtube.com/watch?v=FP7Hs8lTy1k
+## https://jasonwatmore.com/post/2020/08/29/angular-10-boilerplate-email-sign-up-with-verification-authentication-forgot-password  
+## https://www.bezkoder.com/angular-13-jwt-auth/
+## https://github.com/umutesen/angular-material-template
+## https://www.youtube.com/watch?v=FP7Hs8lTy1k
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.

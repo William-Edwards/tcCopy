@@ -19,10 +19,10 @@ export class PointsComponent implements OnInit {
         type: 'spline'
       },
       title: {
-        text: 'Snow depth at Vikjafjellet, Norway'
+        text: 'Track Carbon Emissions'
       },
       subtitle: {
-        text: 'Irregular time data in Highcharts JS'
+        text: 'Dummy data for emissions'
       },
       xAxis: {
         type: 'datetime',
@@ -36,7 +36,7 @@ export class PointsComponent implements OnInit {
       },
       yAxis: {
         title: {
-          text: 'Snow depth (m)'
+          text: 'Carbon emissions (kt)'
         },
         min: 0
       },
@@ -53,7 +53,7 @@ export class PointsComponent implements OnInit {
       // of 1970/71 in order to be compared on the same x axis. Note
       // that in JavaScript, months start at 0 for January, 1 for February etc.
       series: [{
-        name: "Winter 2014-2015",
+        name: "Period 1 2014-2015",
         data: [
           [Date.UTC(1970, 10, 25), 0],
           [Date.UTC(1970, 11, 6), 0.25],
@@ -84,7 +84,7 @@ export class PointsComponent implements OnInit {
           [Date.UTC(1971, 6, 4), 0]
         ]
       }, {
-        name: "Winter 2015-2016",
+        name: "Period 2 2015-2016",
         data: [
           [Date.UTC(1970, 10, 9), 0],
           [Date.UTC(1970, 10, 15), 0.23],
@@ -111,7 +111,7 @@ export class PointsComponent implements OnInit {
           [Date.UTC(1971, 5, 7), 0]
         ]
       }, {
-        name: "Winter 2016-2017",
+        name: "Period 3 2016-2017",
         data: [
           [Date.UTC(1970, 9, 15), 0],
           [Date.UTC(1970, 9, 31), 0.09],

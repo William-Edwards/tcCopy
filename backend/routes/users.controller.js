@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
 const validateRequest = require('../config/validate-request');
-const authorize = require('../config/jwt')
+const authorize = require('../config/jwt');
 const Role = require('../models/role');
-const Tier = require('../models/tiers')
+const Tier = require('../models/tiers');
 const accountService = require('./users.service');
 
 // routes
